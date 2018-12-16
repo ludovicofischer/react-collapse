@@ -1,5 +1,5 @@
 import React from 'react';
-import {presets} from 'react-motion';
+import { config } from 'react-spring';
 import {Collapse} from '../../src';
 
 
@@ -8,15 +8,15 @@ export class SpringConfig extends React.PureComponent {
     isOpened: false,
     height: 100,
     preset: 'stiff',
-    stiffness: presets.stiff.stiffness,
-    damping: presets.stiff.damping
+    tension: config.stiff.tension,
+    friction: config.stiff.friction
   };
 
 
   onChangePreset = ({target: {value: preset}}) => {
-    const {stiffness, damping} = presets[preset];
+    const {tension, friction} = config[preset];
 
-    this.setState({preset, stiffness, damping});
+    this.setState({tension, friction});
   };
 
 
@@ -25,8 +25,8 @@ export class SpringConfig extends React.PureComponent {
       isOpened,
       height,
       preset,
-      stiffness,
-      damping
+      tension,
+      friction
     } = this.state;
 
     return (
@@ -59,44 +59,41 @@ export class SpringConfig extends React.PureComponent {
             <select
               className="input"
               value={preset}
-              step={10}
-              min={0}
-              max={300}
               onChange={this.onChangePreset}>
-              {Object.keys(presets).map(p => <option key={p} value={p}>{p}</option>)}
+              {Object.keys(config).map(p => <option key={p} value={p}>{p}</option>)}
             </select>
           </label>
 
           <label className="label">
-            Stiffness:
+            tension:
             <input
               className="input"
               type="range"
-              value={stiffness}
+              value={tension}
               step={10}
               min={0}
               max={300}
-              onChange={({target: {value}}) => this.setState({stiffness: parseInt(value, 10)})} />
-            {stiffness}
+              onChange={({target: {value}}) => this.setState({tension: parseInt(value, 10)})} />
+            {tension}
           </label>
 
           <label className="label">
-            Damping:
+            friction:
             <input
               className="input"
               type="range"
-              value={damping}
+              value={friction}
               step={5}
               min={0}
               max={40}
-              onChange={({target: {value}}) => this.setState({damping: parseInt(value, 10)})} />
-            {damping}
+              onChange={({target: {value}}) => this.setState({friction: parseInt(value, 10)})} />
+            {friction}
           </label>
         </div>
         <Collapse
 
           isOpened={isOpened}
-          springConfig={{stiffness, damping}}>
+          springConfig={{tension, friction}}>
           <div style={{height}} className="blob" />
         </Collapse>
 
