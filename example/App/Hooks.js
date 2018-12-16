@@ -13,23 +13,12 @@ export class Hooks extends React.PureComponent {
       isOpened: false,
       isResting: false,
       height: -1,
-      width: -1,
       paragraphs: 0
     };
   }
 
-  onRender = ({current, from, to}) => {
-    if (this.ref) {
-      this.ref.innerHTML = `
-        from: ${from.toFixed(2)},
-        to: ${to.toFixed(2)},
-        current: ${current.toFixed(2)}
-      `;
-    }
-  };
-
-  onMeasure = ({height, width}) => {
-    this.setState({height, width});
+  onMeasure = ({height}) => {
+    this.setState({height});
   };
 
   onRest = () => {
@@ -44,7 +33,6 @@ export class Hooks extends React.PureComponent {
     const {
       isOpened,
       height,
-      width,
       paragraphs
     } = this.state;
 
@@ -84,17 +72,13 @@ export class Hooks extends React.PureComponent {
             height: {height}px
           </label>
           <label className="label">
-            width: {width}px
-          </label>
-          <label className="label">
             resting: {this.state.isResting ? 'true' : 'false'}
           </label>
           <label className="label" ref={this.onRef} />
         </div>
         <Collapse
           isOpened={isOpened}
-          onRender={this.onRender}
-          onMeasure={this.onMeasure}
+          onFrame={this.onMeasure}
           onRest={this.onRest}>
           <div className="text">{paragraphs ? getText(paragraphs) : <p>No text</p>}</div>
         </Collapse>

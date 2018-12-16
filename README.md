@@ -103,16 +103,6 @@ to avoid delayed animations. See https://github.com/nkbt/react-collapse/issues/7
 ```
 
 
-#### `fixedHeight`: PropTypes.number
-
-If content's height is known ahead it is possible pass optional `fixedHeight` prop with number of pixels.
-
-```js
-<Collapse isOpened={true} fixedHeight={100}>
-  <div>Animated container will always expand to 100px height</div>
-</Collapse>
-```
-
 
 #### `springConfig`: PropTypes.objectOf(PropTypes.number)
 
@@ -181,7 +171,7 @@ Use spring props.
 
 #### `onMeasure`: PropTypes.func
 
-Callback function for changes in height. Also passes measured width.
+Callback function for changes in height.
 As an [example](https://github.com/nutgaard/react-collapse/blob/master/src/example/App/Hooks.js) it can be used to implement auto-scroll if content expand below the fold.
 
 ```js

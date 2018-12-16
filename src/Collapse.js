@@ -1,12 +1,9 @@
 /* eslint-disable react/no-did-update-set-state,react/no-did-mount-set-state */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spring } from 'react-spring';
+import { Spring, animated } from 'react-spring';
 
 const IDLING = 'IDLING';
-
-
-const noop = () => null;
 
 export class Collapse extends React.PureComponent {
   static propTypes = {
@@ -16,15 +13,13 @@ export class Collapse extends React.PureComponent {
 
     hasNestedCollapse: PropTypes.bool,
 
-    fixedHeight: PropTypes.number,
-
     theme: PropTypes.objectOf(PropTypes.string),
     style: PropTypes.object,
 
     onRender: PropTypes.func,
     onRest: PropTypes.func,
     onMeasure: PropTypes.func,
-
+    fixedHeight: PropTypes.number,
     children: PropTypes.node.isRequired
   };
 
@@ -33,11 +28,8 @@ export class Collapse extends React.PureComponent {
     springConfig: {},
     forceInitialAnimation: false,
     hasNestedCollapse: false,
-    fixedHeight: -1,
     style: {},
-    onRender: noop,
-    onRest: noop,
-    onMeasure: noop
+    fixedHeight: -1,
   };
 
 
@@ -50,38 +42,49 @@ export class Collapse extends React.PureComponent {
     };
   }
 
+   getStyle(springStyles) {
+    if (springStyles.height === 'auto'|| springStyles.height === this.props.fixedHeight) {
+      return {...springStyles};
+    } else {
+      return {...springStyles, overflow: 'hidden'};
+    }
+  }
   renderContent = (springStyles) => { // eslint-disable-line
     const {
       isOpened: _isOpened,
       springConfig: _springConfig,
       forceInitialAnimation: _forceInitialAnimation,
       hasNestedCollapse: _hasNestedCollapse,
-      fixedHeight: _fixedHeight,
       theme,
       style,
       onRest: _onRest,
       onMeasure: _onMeasure,
       children,
+      onFrame,
+      fixedHeight,
       ...props
     } = this.props;
 
+    const dynamicStyles = this.getStyle(springStyles);
     return (
-      <div
-        style={{...springStyles, ...style, overflow: 'hidden'}}
+      <animated.div
+        style={{...dynamicStyles, ...style}}
         {...props}>
         {children}
-      </div>
+      </animated.div>
     );
   };
 
 
   render() {
-    const target = this.props.isOpened ? 'auto' : 0;
+    const targetHeight = this.props.fixedHeight !== -1 ? this.props.fixedHeight : 'auto';
+    const target = this.props.isOpened ? {height: targetHeight} : {height: 0};
     return (
       <Spring
-        from={{height: 0}}
+        native
         onRest={this.props.onRest}
-        to={{height: target }}
+        to={target}
+        onFrame={this.props.onFrame}
         config={this.props.springConfig}>
         {this.renderContent}
       </Spring>
