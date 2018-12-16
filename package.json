@@ -21,7 +21,6 @@
     "start": "scripts/dev.js",
     "dist": "scripts/dist.js",
     "e2e": "scripts/e2e.js",
-    "ghPages": "scripts/ghPages.js",
     "lib": "scripts/lib.js",
     "lint": "eslint src/",
     "pub": "scripts/pub.js",
