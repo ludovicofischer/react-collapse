@@ -1,23 +1,12 @@
 /* eslint-disable react/no-did-update-set-state,react/no-did-mount-set-state */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Motion, spring} from 'react-motion';
+import { Spring } from 'react-spring';
 
-const SPRING_PRECISION = 1;
-
-
-const WAITING = 'WAITING';
-const RESIZING = 'RESIZING';
-const RESTING = 'RESTING';
 const IDLING = 'IDLING';
 
 
 const noop = () => null;
-const css = {
-  collapse: 'ReactCollapse--collapse',
-  content: 'ReactCollapse--content'
-};
-
 
 export class Collapse extends React.PureComponent {
   static propTypes = {
@@ -46,7 +35,6 @@ export class Collapse extends React.PureComponent {
     hasNestedCollapse: false,
     fixedHeight: -1,
     style: {},
-    theme: css,
     onRender: noop,
     onRest: noop,
     onMeasure: noop
@@ -62,128 +50,7 @@ export class Collapse extends React.PureComponent {
     };
   }
 
-
-  componentDidMount() {
-    const {isOpened, forceInitialAnimation, onRest} = this.props;
-    if (isOpened) {
-      const to = this.getTo();
-      if (forceInitialAnimation) {
-        const from = this.wrapper.clientHeight;
-        this.setState({currentState: RESIZING, from, to});
-      } else {
-        this.setState({currentState: IDLING, from: to, to});
-      }
-    }
-    onRest();
-  }
-
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.hasNestedCollapse) {
-      // For nested collapses we do not need to change to waiting state
-      // and should keep `height:auto`
-      // Because children will be animated and height will not jump anyway
-      // See https://github.com/nkbt/react-collapse/issues/76 for more details
-      if (nextProps.isOpened !== this.props.isOpened) {
-        // Still go to WAITING state if own isOpened was changed
-        this.setState({currentState: WAITING});
-      }
-    } else if (this.state.currentState === IDLING && (nextProps.isOpened || this.props.isOpened)) {
-      this.setState({currentState: WAITING});
-    }
-  }
-
-
-  componentDidUpdate(_, prevState) {
-    const {isOpened, onRest, onMeasure} = this.props;
-
-    if (this.state.currentState === IDLING) {
-      onRest();
-      return;
-    }
-
-    if (prevState.to !== this.state.to) {
-      onMeasure({height: this.state.to, width: this.content.clientWidth});
-    }
-
-    const from = this.wrapper.clientHeight;
-    const to = isOpened ? this.getTo() : 0;
-
-    if (from !== to) {
-      this.setState({currentState: RESIZING, from, to});
-      return;
-    }
-
-    if (this.state.currentState === RESTING || this.state.currentState === WAITING) {
-      this.setState({currentState: IDLING, from, to});
-    }
-  }
-
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.raf);
-  }
-
-
-  onContentRef = content => {
-    this.content = content;
-  };
-
-
-  onWrapperRef = wrapper => {
-    this.wrapper = wrapper;
-  };
-
-
-  onRest = () => {
-    this.raf = requestAnimationFrame(this.setResting);
-  };
-
-
-  setResting = () => {
-    this.setState({currentState: RESTING});
-  };
-
-
-  getTo = () => {
-    const {fixedHeight} = this.props;
-    return (fixedHeight > -1) ? fixedHeight : this.content.clientHeight;
-  };
-
-
-  getWrapperStyle = height => {
-    if (this.state.currentState === IDLING && this.state.to) {
-      const {fixedHeight} = this.props;
-      if (fixedHeight > -1) {
-        return {overflow: 'hidden', height: fixedHeight};
-      }
-      return {height: 'auto'};
-    }
-
-    if (this.state.currentState === WAITING && !this.state.to) {
-      return {overflow: 'hidden', height: 0};
-    }
-
-    return {overflow: 'hidden', height: Math.max(0, height)};
-  };
-
-
-  getMotionProps = () => {
-    const {springConfig} = this.props;
-
-    return this.state.currentState === IDLING ? {
-      // When completely stable, instantly jump to the position
-      defaultStyle: {height: this.state.to},
-      style: {height: this.state.to}
-    } : {
-      // Otherwise, animate
-      defaultStyle: {height: this.state.from},
-      style: {height: spring(this.state.to, {precision: SPRING_PRECISION, ...springConfig})}
-    };
-  };
-
-
-  renderContent = ({height}) => { // eslint-disable-line
+  renderContent = (springStyles) => { // eslint-disable-line
     const {
       isOpened: _isOpened,
       springConfig: _springConfig,
@@ -192,38 +59,32 @@ export class Collapse extends React.PureComponent {
       fixedHeight: _fixedHeight,
       theme,
       style,
-      onRender,
       onRest: _onRest,
       onMeasure: _onMeasure,
       children,
       ...props
     } = this.props;
 
-    const {
-      from,
-      to
-    } = this.state;
-
-    // DANGEROUS, use with caution, never do setState with it
-    onRender({current: height, from, to});
-
     return (
       <div
-        ref={this.onWrapperRef}
-        className={theme.collapse}
-        style={{...this.getWrapperStyle(Math.max(0, height)), ...style}}
+        style={{...springStyles, ...style, overflow: 'hidden'}}
         {...props}>
-        <div ref={this.onContentRef} className={theme.content}>{children}</div>
+        {children}
       </div>
     );
   };
 
 
   render() {
+    const target = this.props.isOpened ? 'auto' : 0;
     return (
-      <Motion {...this.getMotionProps()} onRest={this.onRest}>
+      <Spring
+        from={{height: 0}}
+        onRest={this.props.onRest}
+        to={{height: target }}
+        config={this.props.springConfig}>
         {this.renderContent}
-      </Motion>
+      </Spring>
     );
   }
 }

@@ -26,7 +26,7 @@
     "lint": "scripts/lint.js",
     "pub": "scripts/pub.js",
     "test": "scripts/test.js",
-    "prepublish": "yarn build",
+    "prepublish": "npm run build",
     "postversion": "git push --follow-tags"
   },
   "repository": {
@@ -85,6 +85,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-motion": "^0.5.2",
+    "react-spring": "^7.1.3",
     "rimraf": "^2.6.2",
     "serve-static": "^1.13.1",
     "style-loader": "^0.19.1",

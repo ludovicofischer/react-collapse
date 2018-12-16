@@ -171,9 +171,7 @@ NOTE: these are not style objects, but class names!
 
 #### `onRest`: PropTypes.func
 
-Callback function for animation finished from
-[react-motion](https://github.com/chenglou/react-motion#--onrest---void).
-It can be used to trigger any function after animation is done.
+Use spring props.
 
 ```js
 <Collapse onRest={() => console.log(123)}>
@@ -194,18 +192,8 @@ As an [example](https://github.com/nutgaard/react-collapse/blob/master/src/examp
 
 #### `onRender`: PropTypes.func
 
-Callback function for every re-render while animating.
+Use Spring `onFrame`
 
-Passes `current` height, as well as `from`/`to` heights.
-
-**DANGEROUS** use with caution, may have huge performance impact if used improperly. Never do `setState` with it, since it is running while rendering and React will shoot Warning.
- 
-Possible usage: synchronous scrolling of some other component
-```js
-<Collapse onRender={({current, from, to}) => (this.anotherComponent.scrollTop = current)}>
-  <div>Container text</div>
-</Collapse>
-```
 
 #### Pass-through props
 
