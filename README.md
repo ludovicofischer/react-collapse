@@ -1,14 +1,3 @@
-# react-collapse [![npm](https://img.shields.io/npm/v/react-collapse.svg?style=flat-square)](https://www.npmjs.com/package/react-collapse)
-
-[![Gitter](https://img.shields.io/gitter/room/nkbt/help.svg?style=flat-square)](https://gitter.im/nkbt/help)
-
-[![CircleCI](https://img.shields.io/circleci/project/nkbt/react-collapse.svg?style=flat-square&label=nix-build)](https://circleci.com/gh/nkbt/react-collapse)
-[![Dependencies](https://img.shields.io/david/nkbt/react-collapse.svg?style=flat-square)](https://david-dm.org/nkbt/react-collapse)
-[![Dev Dependencies](https://img.shields.io/david/dev/nkbt/react-collapse.svg?style=flat-square)](https://david-dm.org/nkbt/react-collapse#info=devDependencies)
-
-Component-wrapper for collapse animation with react-motion for elements with variable (and dynamic) height
-
-
 ![React Collapse](example/react-collapse.gif)
 
 
@@ -17,16 +6,16 @@ Component-wrapper for collapse animation with react-motion for elements with var
 ### NPM
 
 ```sh
-npm install --save react react-motion react-collapse
+npm install --save react react-spring react-collapse
 ```
 
-Don't forget to manually install peer dependencies (`react`, `react-motion`) if you use npm@3.
+Don't forget to manually install peer dependencies (`react`, `react-spring`) if you use npm@3.
 
 
 ### 1998 Script Tag:
 ```html
 <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-motion/build/react-motion.js"></script>
+<script src="https://unpkg.com/react-spring/build/react-spring.js"></script>
 <script src="https://unpkg.com/react-collapse/build/react-collapse.js"></script>
 (Module exposed as `ReactCollapse`)
 ```
@@ -106,18 +95,18 @@ to avoid delayed animations. See https://github.com/nkbt/react-collapse/issues/7
 
 #### `springConfig`: PropTypes.objectOf(PropTypes.number)
 
-Custom config `{stiffness, damping, precision}` passed to the spring function (see https://github.com/chenglou/react-motion#--spring-val-number-config-springhelperconfig--opaqueconfig)
+Custom config `{tension, friction}` passed to the spring function (see http://react-spring.surge.sh/spring#config)
 
 ```js
-import {presets} from 'react-motion';
+import {config} from 'react-spring';
 
-<Collapse isOpened={true} springConfig={presets.wobbly}>
+<Collapse isOpened={true} springConfig={config.wobbly}>
   <div>Wobbly animated container</div>
 </Collapse>
 ```
 
 ```js
-<Collapse isOpened={true} springConfig={{stiffness: 100, damping: 20}}>
+<Collapse isOpened={true} springConfig={{tension: 100, friction: 20}}>
   <div>Customly animated container</div>
 </Collapse>
 ```
