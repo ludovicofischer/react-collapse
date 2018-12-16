@@ -55,12 +55,12 @@ exports.loaders = {
     options: {
       babelrc: false,
       presets: [
-        `react`,
-        [`env`, {modules: false}]
+        `@babel/preset-react`,
+        [`@babel/preset-env`, {modules: false}]
       ],
       plugins: [
-        `transform-object-rest-spread`,
-        `transform-class-properties`
+        `@babel/plugin-proposal-object-rest-spread`,
+        `@babel/plugin-proposal-class-properties`
       ],
       env: {
         production: {

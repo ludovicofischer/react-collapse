@@ -12,7 +12,7 @@ const {
 
 module.exports = {
   devtool: `#source-map`,
-
+  mode: 'development',
   entry: [
     pathTo(`example`, `index.js`),
     `webpack-dev-server/client?http://localhost:8080`
