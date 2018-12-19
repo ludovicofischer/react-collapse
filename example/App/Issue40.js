@@ -26,7 +26,7 @@ export class Issue40 extends React.PureComponent {
           </label>
         </div>
 
-        <Collapse isOpened={isOpened} hasNestedCollapse>
+        <Collapse isOpened={isOpened}>
           <VariableHeight className="subCollapse" />
         </Collapse>
       </div>

@@ -1,66 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Collapse} from './Collapse';
+import { Transition } from 'react-spring';
 
 
-export class UnmountClosed extends React.PureComponent {
-  static propTypes = {
-    isOpened: PropTypes.bool.isRequired,
-    onRest: PropTypes.func
-  };
+function Unmounter(props) {
+  return (
+    <Transition
+      from={{height: 0}}
+      enter={{height: 'auto'}}
+      leave={{height: 0}}
+      items={props.isOpened}
+      onDestroyed={props.onRest}
+    >
+      {isOpened => isOpened && (springProps => <div style={{...springProps, overflow: 'hidden'}}>{props.children}</div>)}
+    </Transition>
+  );
 
-  static defaultProps = {
-    onRest: undefined
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldUnmount: !this.props.isOpened,
-      forceInitialAnimation: !this.props.isOpened
-    };
-  }
-
-  componentWillReceiveProps = ({isOpened}) => {
-    if (!this.props.isOpened && isOpened) {
-      this.setState({
-        forceInitialAnimation: true,
-        shouldUnmount: false
-      });
-    }
-  };
-
-
-  onRest = (...args) => {
-    const {isOpened, onRest} = this.props;
-
-    if (!isOpened) {
-      this.setState({shouldUnmount: true});
-    }
-    if (onRest) {
-      onRest(...args);
-    }
-  };
-
-
-  render() {
-    const {
-      isOpened,
-      onRest: _onRest,
-      ...props
-    } = this.props;
-
-    const {
-      forceInitialAnimation,
-      shouldUnmount
-    } = this.state;
-
-    return shouldUnmount ? null : (
-      <Collapse
-        forceInitialAnimation={forceInitialAnimation}
-        isOpened={isOpened}
-        onRest={this.onRest}
-        {...props} />
-    );
-  }
 }
+
+Unmounter.propTypes = {
+  isOpened: PropTypes.bool.isRequired,
+  onRest: PropTypes.func
+};
+
+const UnmountClosed = React.memo(Unmounter);
+
+export {  UnmountClosed };

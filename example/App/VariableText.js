@@ -54,7 +54,7 @@ export class VariableText extends React.Component {
           </label>
         </div>
 
-        <Collapse isOpened={isOpened}>
+        <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
           <div className="text">
             {paragraphs ? getText(paragraphs) : <p>No text</p>}
           </div>

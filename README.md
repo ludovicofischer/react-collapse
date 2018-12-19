@@ -75,24 +75,6 @@ One or multiple children with static, variable or dynamic height.
 ```
 
 
-#### `hasNestedCollapse`: PropTypes.bool (default: false)
-
-If Collapse component has more Collapse components inside, it needs `hasNestedCollapse` to be set 
-to avoid delayed animations. See https://github.com/nkbt/react-collapse/issues/76 for tech details.
-
-```js
-<Collapse isOpened={true} hasNestedCollapse={true}>
-  <Collapse isOpened={true}>
-    <div>Nested collapse</div>
-  </Collapse>
-  <Collapse isOpened={true}>
-    <div>Nested collapse</div>
-  </Collapse>
-</Collapse>
-```
-
-
-
 #### `springConfig`: PropTypes.objectOf(PropTypes.number)
 
 Custom config `{tension, friction}` passed to the spring function (see http://react-spring.surge.sh/spring#config)

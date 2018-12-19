@@ -10,12 +10,8 @@ export class Collapse extends React.PureComponent {
     isOpened: PropTypes.bool.isRequired,
     springConfig: PropTypes.objectOf(PropTypes.number),
     forceInitialAnimation: PropTypes.bool,
-
-    hasNestedCollapse: PropTypes.bool,
-
-    theme: PropTypes.objectOf(PropTypes.string),
     style: PropTypes.object,
-
+    className: PropTypes.string,
     onRender: PropTypes.func,
     onRest: PropTypes.func,
     onMeasure: PropTypes.func,
@@ -27,9 +23,9 @@ export class Collapse extends React.PureComponent {
   static defaultProps = {
     springConfig: {},
     forceInitialAnimation: false,
-    hasNestedCollapse: false,
     style: {},
     fixedHeight: -1,
+    className: ""
   };
 
 
@@ -51,16 +47,13 @@ export class Collapse extends React.PureComponent {
   }
   renderContent = (springStyles) => { // eslint-disable-line
     const {
-      isOpened: _isOpened,
-      springConfig: _springConfig,
-      forceInitialAnimation: _forceInitialAnimation,
-      hasNestedCollapse: _hasNestedCollapse,
-      theme,
+      isOpened,
+      springConfig,
+      forceInitialAnimation,
       style,
       onRest: _onRest,
-      onMeasure: _onMeasure,
-      children,
       onFrame,
+      children,
       fixedHeight,
       ...props
     } = this.props;
@@ -69,6 +62,7 @@ export class Collapse extends React.PureComponent {
     return (
       <animated.div
         style={{...dynamicStyles, ...style}}
+        className={this.props.className}
         {...props}>
         {children}
       </animated.div>

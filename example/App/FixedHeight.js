@@ -51,7 +51,7 @@ export class FixedHeight extends React.PureComponent {
           </label>
         </div>
 
-        <Collapse isOpened={isOpened} fixedHeight={fixedHeight}>
+        <Collapse isOpened={isOpened} fixedHeight={fixedHeight} className="ReactCollapse--collapse">
           <div style={{height}} className="blob" />
         </Collapse>
 

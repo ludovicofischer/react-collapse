@@ -79,7 +79,8 @@ export class Hooks extends React.PureComponent {
         <Collapse
           isOpened={isOpened}
           onFrame={this.onMeasure}
-          onRest={this.onRest}>
+          onRest={this.onRest}
+          className="ReactCollapse--collapse">
           <div className="text">{paragraphs ? getText(paragraphs) : <p>No text</p>}</div>
         </Collapse>
       </div>

@@ -91,7 +91,7 @@ export class SpringConfig extends React.PureComponent {
           </label>
         </div>
         <Collapse
-
+          className="ReactCollapse--collapse"
           isOpened={isOpened}
           springConfig={{tension, friction}}>
           <div style={{height}} className="blob" />

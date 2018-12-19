@@ -24,7 +24,7 @@ export class InitiallyOpened extends React.PureComponent {
               onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
           </label>
         </div>
-        <Collapse isOpened={isOpened}>
+        <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
           <div style={{height}} className="blob" />
         </Collapse>
       </div>

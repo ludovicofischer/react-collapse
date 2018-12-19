@@ -25,7 +25,7 @@ export class Issue163 extends React.PureComponent {
           </label>
         </div>
 
-        <Collapse isOpened={isOpened}>
+        <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
           <div style={{height: 100, paddingTop: 50, paddingLeft: 50}} className="blob">
             <div className="config" style={{position: 'relative'}}>
               <label className="label">
