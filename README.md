@@ -252,17 +252,10 @@ open http://localhost:8080
 
 ```bash
 # to run ESLint check
-yarn lint
+npm lint
 
 # to run tests
-yarn test
-
-# to run end-to-end tests
-# first, run `selenium/standalone-firefox:3.4.0` docker image
-docker run -p 4444:4444 selenium/standalone-firefox:3.4.0
-# then run test
-yarn e2e
-```
+npm test
 
 ## License
 
