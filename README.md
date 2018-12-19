@@ -239,10 +239,10 @@ Currently is being developed and tested with the latest stable `Node 8` on `OSX`
 To run example covering all `ReactCollapse` features, use `yarn start`, which will compile `example/Example.js`
 
 ```bash
-git clone git@github.com:nkbt/react-collapse.git
+git clone git@github.com:ludovicofischer/react-collapse.git
 cd react-collapse
-yarn install
-yarn start
+npm install
+npm start
 
 # then
 open http://localhost:8080

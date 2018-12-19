@@ -17,20 +17,15 @@
     ]
   },
   "scripts": {
-    "build": "scripts/build.js",
     "start": "scripts/dev.js",
     "dist": "scripts/dist.js",
-    "e2e": "scripts/e2e.js",
-    "lib": "scripts/lib.js",
     "lint": "eslint src/",
-    "pub": "scripts/pub.js",
-    "test": "scripts/test.js",
     "prepublishOnly": "npm run build",
     "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nkbt/react-collapse.git"
+    "url": "https://github.com/ludovicofischer/react-collapse.git"
   },
   "keywords": [
     "component",
