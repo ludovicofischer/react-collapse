@@ -5,8 +5,8 @@ import babel from 'rollup-plugin-babel';
 module.exports = {
   input: 'src/index.js',
   output: {
-    file: 'bundle.js',
-    format: 'cjs'
+    file: 'dist/index.js',
+    format: 'esm'
   },
  plugins: [
   resolve({browser: true, jsnext: true}),

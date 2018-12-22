@@ -1,26 +1,13 @@
 {
   "name": "react-collapse",
-  "version": "4.0.3",
-  "description": "Component-wrapper for collapse animation with react-motion for elements with variable (and dynamic) height",
-  "main": "lib/index.js",
-  "config": {
-    "component": "ReactCollapse",
-    "externals": {
-      "react": "React",
-      "react-dom": "ReactDOM",
-      "react-motion": "ReactMotion"
-    },
-    "include": [
-      "https://unpkg.com/react/umd/react.production.min.js",
-      "https://unpkg.com/react-dom/umd/react-dom.production.min.js",
-      "https://unpkg.com/react-motion/build/react-motion.js"
-    ]
-  },
+  "version": "1.0.0",
+  "description": "Component-wrapper for collapse animation with react-spring for elements with variable (and dynamic) height",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "scripts/dev.js",
-    "dist": "scripts/dist.js",
+    "start": "webpack-dev-server --config scripts/utils/webpack/dev.config.js",
+    "dist": "rollup -c",
     "lint": "eslint src/",
-    "prepublishOnly": "npm run build",
     "postversion": "git push --follow-tags"
   },
   "repository": {
@@ -43,7 +30,8 @@
   },
   "homepage": "https://github.com/ludovicofischer/react-collapse",
   "peerDependencies": {
-    "react": ">=16.4",
+    "react": ">=16.4.0",
+    "react-dom": ">=16.4.0",
     "react-spring": "^7.1.0"
   },
   "dependencies": {},
@@ -59,7 +47,6 @@
     "@types/react-dom": "^16.0.11",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.12",
     "babili-webpack-plugin": "^0.1.2",
     "css-loader": "^2.0.2",
     "eslint": "^5.10.0",
@@ -69,9 +56,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-tree-shaking": "^1.7.3",
-    "finalhandler": "^1.1.0",
     "glob": "^7.1.2",
-    "html-webpack-include-assets-plugin": "^1.0.2",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.15.3",
     "react": "^16.7.0",
@@ -82,16 +67,13 @@
     "rollup-plugin-babel": "^4.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
-    "serve-static": "^1.13.1",
     "style-loader": "^0.23.1",
     "typescript": "^3.2.2",
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2",
+    "webpack": "4.28.2",
     "webpack-dev-server": "^3.1.12"
   },
   "files": [
-    "build",
-    "lib",
+    "dist",
     "src",
     "LICENSE",
     "package.json",

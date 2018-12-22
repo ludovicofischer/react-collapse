@@ -6,7 +6,7 @@ import { Spring, animated } from 'react-spring';
  * onRest: (string|number) => void,
  * fixedHeight: number, children: React.ReactChildren, onFrame: function, springConfig: any }} props
  */
-export function Collapse(props) {
+function Collapser(props) {
 
   /**
    * @param {{ height: string | number  }} springStyles
@@ -67,9 +67,11 @@ export function Collapse(props) {
     );
 }
 
-Collapse.defaultProps = {
+Collapser.defaultProps = {
   springConfig: {},
   style: {},
   fixedHeight: -1,
   className: ''
 };
+
+export const Collapse = React.memo(Collapser);
