@@ -4,16 +4,18 @@ import {Collapse} from '../../src';
 
 
 export class SpringConfig extends React.PureComponent {
-  state = {
-    isOpened: false,
-    height: 100,
-    preset: 'stiff',
-    tension: config.stiff.tension,
-    friction: config.stiff.friction
-  };
+  constructor() {
+    super();
+    this.state = {
+      isOpened: false,
+      height: 100,
+      preset: 'stiff',
+      tension: config.stiff.tension,
+      friction: config.stiff.friction
+    };
+  }
 
-
-  onChangePreset = ({target: {value: preset}}) => {
+  onChangePreset({target: {value: preset}}) {
     const {tension, friction} = config[preset];
 
     this.setState({tension, friction});

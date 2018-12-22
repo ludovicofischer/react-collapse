@@ -1,29 +1,20 @@
 import React from 'react';
 import { Spring, animated } from 'react-spring';
 
-const IDLING = 'IDLING';
-
-export class Collapse extends React.PureComponent {
-  /**
-   * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
-   * fixedHeight: number, children: React.ReactChildren, onFrame: function }} props
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentState: IDLING,
-      from: 0,
-      to: 0
-    };
-  }
+/**
+ * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
+ * onRest: (string|number) => void,
+ * fixedHeight: number, children: React.ReactChildren, onFrame: function, springConfig: any }} props
+ */
+export function Collapse(props) {
 
   /**
    * @param {{ height: string | number  }} springStyles
    */
-  getStyle(springStyles) {
+  function getStyle(springStyles, props) {
     if (
       springStyles.height === 'auto' ||
-      springStyles.height === this.props.fixedHeight
+      springStyles.height === props.fixedHeight
     ) {
       return { ...springStyles };
     } else {
@@ -33,7 +24,7 @@ export class Collapse extends React.PureComponent {
   /**
 @param {{ height: string | number  }} springStyles
    */
-  renderContent = springStyles => {
+  function renderContent(springStyles, props) {
     // eslint-disable-line
     const {
       isOpened,
@@ -43,39 +34,37 @@ export class Collapse extends React.PureComponent {
       onFrame,
       children,
       fixedHeight,
-      ...props
-    } = this.props;
+      ...other
+    } = props;
 
-    const dynamicStyles = this.getStyle(springStyles);
+    const dynamicStyles = getStyle(springStyles, props);
     return (
       <animated.div
         style={{ ...dynamicStyles, ...style }}
-        className={this.props.className}
-        {...props}
+        className={props.className}
+        {...other}
       >
         {children}
       </animated.div>
     );
-  };
+  }
 
-  render() {
     const targetHeight =
-      this.props.fixedHeight !== -1 ? this.props.fixedHeight : 'auto';
-    const target = this.props.isOpened
+      props.fixedHeight !== -1 ? props.fixedHeight : 'auto';
+    const target = props.isOpened
       ? { height: targetHeight }
       : { height: 0 };
     return (
       <Spring
         native
-        onRest={this.props.onRest}
+        onRest={props.onRest}
         to={target}
-        onFrame={this.props.onFrame}
-        config={this.props.springConfig}
+        onFrame={props.onFrame}
+        config={props.springConfig}
       >
-        {this.renderContent}
+        {springStyles => renderContent(springStyles, props)}
       </Spring>
     );
-  }
 }
 
 Collapse.defaultProps = {

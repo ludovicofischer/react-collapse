@@ -30,17 +30,11 @@ const styles = {
 
 
 export class Issue59 extends React.PureComponent {
-  state = {opened: 1, whatever: 'b'};
+  constructor() {
+    super();
+    this.state = {opened: 1, whatever: 'b'};
 
-
-  onClick1 = () => {
-    this.setState({opened: 1});
-  };
-
-
-  onClick2 = () => {
-    this.setState({opened: 2}, () => setTimeout(() => this.setState({whatever: 'bb'}), 50));
-  };
+  }
 
 
   render() {
@@ -48,7 +42,9 @@ export class Issue59 extends React.PureComponent {
     return (
       <div>
         <div style={styles.mb3}>
-          <div style={styles.ba} onClick={this.onClick1}>Header 1</div>
+          <div style={styles.ba} onClick={() => {
+            this.setState({opened: 1});
+          }}>Header 1</div>
           <Collapse isOpened={opened === 1}>
             <div style={{...styles.ba, ...styles.pa3}}>
               <div style={{...styles.h3, ...styles.w3, ...styles.bgBlack}}>a</div>
@@ -56,7 +52,9 @@ export class Issue59 extends React.PureComponent {
           </Collapse>
         </div>
         <div style={styles.mb3}>
-          <div style={styles.ba} onClick={this.onClick2}>Header 2</div>
+          <div style={styles.ba} onClick={() => {
+            this.setState({opened: 2}, () => setTimeout(() => this.setState({whatever: 'bb'}), 50));
+          }}>Header 2</div>
           <Collapse isOpened={opened === 2}>
             <div style={{...styles.ba, ...styles.pa3}}>
               <div style={{...styles.h3, ...styles.w3, ...styles.bgBlack}}>

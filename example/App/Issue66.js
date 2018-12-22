@@ -4,11 +4,6 @@ import {Collapse} from '../../src';
 
 
 class Test extends React.Component {
-  static propTypes = {
-    onMount: PropTypes.func.isRequired,
-    onUnmount: PropTypes.func.isRequired
-  };
-
 
   componentDidMount() {
     this.props.onMount();
@@ -27,10 +22,6 @@ class Test extends React.Component {
 
 
 export class Issue66 extends React.Component {
-  static propTypes = {
-    isOpened: PropTypes.bool.isRequired
-  };
-
 
   constructor(props) {
     super(props);
@@ -43,13 +34,7 @@ export class Issue66 extends React.Component {
     this.messages = [];
   }
 
-
-  onRef = ref => {
-    this.ref = ref;
-  };
-
-
-  onMount = () => {
+  onMount()  {
     if (this.ref) {
       this.messages.unshift(`${this.counter}. Mounted`);
       this.messages = this.messages.slice(0, 5);
@@ -59,7 +44,7 @@ export class Issue66 extends React.Component {
   };
 
 
-  onUnmount = () => {
+  onUnmount() {
     if (this.ref) {
       this.messages.unshift(`${this.counter}. Unmounted`);
       this.messages = this.messages.slice(0, 5);
@@ -69,7 +54,7 @@ export class Issue66 extends React.Component {
   };
 
 
-  onChange = ({target: {checked}}) => {
+  onChange({target: {checked}}) {
     this.setState({shouldRender: checked});
   };
 
@@ -87,7 +72,7 @@ export class Issue66 extends React.Component {
           </label>
         </div>
 
-        <div className="log" ref={this.onRef} />
+        <div className="log" ref={ref => this.ref = ref} />
 
         {this.state.shouldRender ? (
           <Collapse isOpened={this.props.isOpened}>
@@ -98,3 +83,11 @@ export class Issue66 extends React.Component {
     );
   }
 }
+Issue66.propTypes = {
+  isOpened: PropTypes.bool.isRequired
+};
+
+Test.propTypes = {
+  onMount: PropTypes.func.isRequired,
+  onUnmount: PropTypes.func.isRequired
+};

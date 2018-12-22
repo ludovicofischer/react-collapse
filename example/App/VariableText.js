@@ -9,16 +9,6 @@ const getText = num => text.slice(0, num)
 
 
 export class VariableText extends React.Component {
-  static propTypes = {
-    isOpened: PropTypes.bool
-  };
-
-
-  static defaultProps = {
-    isOpened: false
-  };
-
-
   constructor(props) {
     super(props);
     this.state = {isOpened: this.props.isOpened, paragraphs: 0};
@@ -63,3 +53,11 @@ export class VariableText extends React.Component {
     );
   }
 }
+
+VariableText.propTypes = {
+  isOpened: PropTypes.bool
+};
+
+VariableText.defaultProps = {
+  isOpened: false
+};

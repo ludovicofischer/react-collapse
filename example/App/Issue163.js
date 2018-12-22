@@ -3,10 +3,14 @@ import {Collapse} from '../../src';
 
 
 export class Issue163 extends React.PureComponent {
-  state = {
-    isOpened: true,
-    isOverflowOpened: true
-  };
+  constructor() {
+    super();
+    this.state = {
+      isOpened: true,
+      isOverflowOpened: true
+    };
+
+  }
 
 
   render() {

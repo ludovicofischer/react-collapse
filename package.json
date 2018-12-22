@@ -30,7 +30,7 @@
   "keywords": [
     "component",
     "react-component",
-    "react-motion",
+    "react-spring",
     "react",
     "collapse",
     "slide-down",
@@ -50,7 +50,6 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
@@ -85,7 +84,6 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "serve-static": "^1.13.1",
     "style-loader": "^0.23.1",
-    "tape": "^4.8.0",
     "typescript": "^3.2.2",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",

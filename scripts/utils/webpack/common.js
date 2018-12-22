@@ -60,15 +60,7 @@ exports.loaders = {
       ],
       plugins: [
         `@babel/plugin-proposal-object-rest-spread`,
-        `@babel/plugin-proposal-class-properties`
       ],
-      env: {
-        production: {
-          plugins: [
-            [`transform-react-remove-prop-types`, {removeImport: true}]
-          ]
-        }
-      }
     }
   }
 };

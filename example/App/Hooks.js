@@ -17,18 +17,6 @@ export class Hooks extends React.PureComponent {
     };
   }
 
-  onMeasure = ({height}) => {
-    this.setState({height});
-  };
-
-  onRest = () => {
-    this.setState({isResting: true});
-  };
-
-  onRef = ref => {
-    this.ref = ref;
-  };
-
   render() {
     const {
       isOpened,
@@ -74,12 +62,18 @@ export class Hooks extends React.PureComponent {
           <label className="label">
             resting: {this.state.isResting ? 'true' : 'false'}
           </label>
-          <label className="label" ref={this.onRef} />
+          <label className="label" ref={ref => {
+            this.ref = ref;
+          }} />
         </div>
         <Collapse
           isOpened={isOpened}
-          onFrame={this.onMeasure}
-          onRest={this.onRest}
+          onFrame={({height}) => {
+            this.setState({height});
+          }}
+          onRest={() => {
+            this.setState({isResting: true});
+          }}
           className="ReactCollapse--collapse">
           <div className="text">{paragraphs ? getText(paragraphs) : <p>No text</p>}</div>
         </Collapse>
