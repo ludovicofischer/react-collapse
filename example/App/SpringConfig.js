@@ -13,11 +13,11 @@ export class SpringConfig extends React.PureComponent {
       tension: config.stiff.tension,
       friction: config.stiff.friction
     };
+    this.onChangePreset = this.onChangePreset.bind(this);
   }
 
   onChangePreset({target: {value: preset}}) {
     const {tension, friction} = config[preset];
-
     this.setState({tension, friction});
   };
 

@@ -26,12 +26,9 @@ export class Issue66 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {shouldRender: false};
-  }
-
-
-  componentWillMount() {
     this.counter = 0;
     this.messages = [];
+    this.onChange = this.onChange.bind(this);
   }
 
   onMount()  {
@@ -43,7 +40,6 @@ export class Issue66 extends React.Component {
     }
   };
 
-
   onUnmount() {
     if (this.ref) {
       this.messages.unshift(`${this.counter}. Unmounted`);
@@ -54,6 +50,10 @@ export class Issue66 extends React.Component {
   };
 
 
+  /**
+   *
+   * @param {{target: {checked: boolean}}} checked
+   */
   onChange({target: {checked}}) {
     this.setState({shouldRender: checked});
   };
@@ -83,6 +83,7 @@ export class Issue66 extends React.Component {
     );
   }
 }
+
 Issue66.propTypes = {
   isOpened: PropTypes.bool.isRequired
 };
