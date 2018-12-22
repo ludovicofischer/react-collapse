@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transition } from 'react-spring';
+import { Transition, animated } from 'react-spring';
 
 /**
  * @param {{ isOpened: boolean, onRest: () => void, children: React.ReactChildren }} props
@@ -7,6 +7,7 @@ import { Transition } from 'react-spring';
 const UnmountClosed = React.memo(function Unmounter(props) {
   return (
     <Transition
+      native
       from={{ height: 0 }}
       enter={{ height: 'auto' }}
       leave={{ height: 0 }}
@@ -16,9 +17,9 @@ const UnmountClosed = React.memo(function Unmounter(props) {
       {isOpened =>
         isOpened &&
         (springProps => (
-          <div style={{ ...springProps, overflow: 'hidden' }}>
+          <animated.div style={{ ...springProps, overflow: 'hidden' }}>
             {props.children}
-          </div>
+          </animated.div>
         ))
       }
     </Transition>
