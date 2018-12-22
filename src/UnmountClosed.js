@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Transition } from 'react-spring';
 
 
-function Unmounter(props) {
+/**
+ * @param {{ isOpened: boolean, onRest: () => void, children: React.ReactChildren }} props
+ */
+const UnmountClosed = React.memo(function Unmounter(props) {
   return (
     <Transition
       from={{height: 0}}
@@ -16,13 +18,7 @@ function Unmounter(props) {
     </Transition>
   );
 
-}
+});
 
-Unmounter.propTypes = {
-  isOpened: PropTypes.bool.isRequired,
-  onRest: PropTypes.func
-};
-
-const UnmountClosed = React.memo(Unmounter);
 
 export {  UnmountClosed };

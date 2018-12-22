@@ -1,34 +1,14 @@
-/* eslint-disable react/no-did-update-set-state,react/no-did-mount-set-state */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Spring, animated } from 'react-spring';
 
 const IDLING = 'IDLING';
 
 export class Collapse extends React.PureComponent {
-  static propTypes = {
-    isOpened: PropTypes.bool.isRequired,
-    springConfig: PropTypes.objectOf(PropTypes.number),
-    forceInitialAnimation: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onRender: PropTypes.func,
-    onRest: PropTypes.func,
-    onMeasure: PropTypes.func,
-    fixedHeight: PropTypes.number,
-    children: PropTypes.node.isRequired
-  };
 
-
-  static defaultProps = {
-    springConfig: {},
-    forceInitialAnimation: false,
-    style: {},
-    fixedHeight: -1,
-    className: ""
-  };
-
-
+  /**
+   * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
+   * fixedHeight: number, children: React.ReactChildren, onFrame: function }} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -38,18 +18,23 @@ export class Collapse extends React.PureComponent {
     };
   }
 
-   getStyle(springStyles) {
+  /**
+   * @param {{ height: string | number  }} springStyles
+   */
+  getStyle(springStyles) {
     if (springStyles.height === 'auto'|| springStyles.height === this.props.fixedHeight) {
       return {...springStyles};
     } else {
       return {...springStyles, overflow: 'hidden'};
     }
   }
+  /**
+@param {{ height: string | number  }} springStyles
+   */
   renderContent = (springStyles) => { // eslint-disable-line
     const {
       isOpened,
       springConfig,
-      forceInitialAnimation,
       style,
       onRest: _onRest,
       onFrame,
@@ -85,3 +70,10 @@ export class Collapse extends React.PureComponent {
     );
   }
 }
+
+Collapse.defaultProps = {
+  springConfig: {},
+  style: {},
+  fixedHeight: -1,
+  className: ""
+};
