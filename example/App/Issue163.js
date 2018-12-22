@@ -1,6 +1,5 @@
 import React from 'react';
-import {Collapse} from '../../src';
-
+import { Collapse } from '../../src';
 
 export class Issue163 extends React.PureComponent {
   constructor() {
@@ -9,12 +8,10 @@ export class Issue163 extends React.PureComponent {
       isOpened: true,
       isOverflowOpened: true
     };
-
   }
 
-
   render() {
-    const {isOpened, isOverflowOpened} = this.state;
+    const { isOpened, isOverflowOpened } = this.state;
 
     return (
       <div>
@@ -25,25 +22,39 @@ export class Issue163 extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
         </div>
 
         <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
-          <div style={{height: 100, paddingTop: 50, paddingLeft: 50}} className="blob">
-            <div className="config" style={{position: 'relative'}}>
+          <div
+            style={{ height: 100, paddingTop: 50, paddingLeft: 50 }}
+            className="blob"
+          >
+            <div className="config" style={{ position: 'relative' }}>
               <label className="label">
                 Overflow opened:
                 <input
                   className="input"
                   type="checkbox"
                   checked={isOverflowOpened}
-                  onChange={({target: {checked}}) => this.setState({isOverflowOpened: checked})} />
+                  onChange={({ target: { checked } }) =>
+                    this.setState({ isOverflowOpened: checked })
+                  }
+                />
               </label>
               {isOverflowOpened && (
-                <div style={{
-                  width: 200, height: 200, background: 'black', position: 'absolute'
-                }} />
+                <div
+                  style={{
+                    width: 200,
+                    height: 200,
+                    background: 'black',
+                    position: 'absolute'
+                  }}
+                />
               )}
             </div>
           </div>

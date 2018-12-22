@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import {Collapse} from '../../src';
-
+import { Collapse } from '../../src';
 
 const styles = {
   ba: {
@@ -28,36 +27,47 @@ const styles = {
   }
 };
 
-
 export class Issue59 extends React.PureComponent {
   constructor() {
     super();
-    this.state = {opened: 1, whatever: 'b'};
-
+    this.state = { opened: 1, whatever: 'b' };
   }
 
-
   render() {
-    const {opened, whatever} = this.state;
+    const { opened, whatever } = this.state;
     return (
       <div>
         <div style={styles.mb3}>
-          <div style={styles.ba} onClick={() => {
-            this.setState({opened: 1});
-          }}>Header 1</div>
+          <div
+            style={styles.ba}
+            onClick={() => {
+              this.setState({ opened: 1 });
+            }}
+          >
+            Header 1
+          </div>
           <Collapse isOpened={opened === 1}>
-            <div style={{...styles.ba, ...styles.pa3}}>
-              <div style={{...styles.h3, ...styles.w3, ...styles.bgBlack}}>a</div>
+            <div style={{ ...styles.ba, ...styles.pa3 }}>
+              <div style={{ ...styles.h3, ...styles.w3, ...styles.bgBlack }}>
+                a
+              </div>
             </div>
           </Collapse>
         </div>
         <div style={styles.mb3}>
-          <div style={styles.ba} onClick={() => {
-            this.setState({opened: 2}, () => setTimeout(() => this.setState({whatever: 'bb'}), 50));
-          }}>Header 2</div>
+          <div
+            style={styles.ba}
+            onClick={() => {
+              this.setState({ opened: 2 }, () =>
+                setTimeout(() => this.setState({ whatever: 'bb' }), 50)
+              );
+            }}
+          >
+            Header 2
+          </div>
           <Collapse isOpened={opened === 2}>
-            <div style={{...styles.ba, ...styles.pa3}}>
-              <div style={{...styles.h3, ...styles.w3, ...styles.bgBlack}}>
+            <div style={{ ...styles.ba, ...styles.pa3 }}>
+              <div style={{ ...styles.h3, ...styles.w3, ...styles.bgBlack }}>
                 {whatever}
               </div>
             </div>

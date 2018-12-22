@@ -1,22 +1,20 @@
 import React from 'react';
-import {VariableText} from './VariableText';
-import {VariableHeight} from './VariableHeight';
-import {FixedHeight} from './FixedHeight';
-import {InitiallyOpened} from './InitiallyOpened';
-import {SpringConfig} from './SpringConfig';
-import {Nested} from './Nested';
-import {Hooks} from './Hooks';
-import {AutoUnmount} from './AutoUnmount';
+import { VariableText } from './VariableText';
+import { VariableHeight } from './VariableHeight';
+import { FixedHeight } from './FixedHeight';
+import { InitiallyOpened } from './InitiallyOpened';
+import { SpringConfig } from './SpringConfig';
+import { Nested } from './Nested';
+import { Hooks } from './Hooks';
+import { AutoUnmount } from './AutoUnmount';
 
-import {Issue40} from './Issue40';
-import {Issue59} from './Issue59';
-import {Issue66} from './Issue66';
-import {Issue163} from './Issue163';
-
+import { Issue40 } from './Issue40';
+import { Issue59 } from './Issue59';
+import { Issue66 } from './Issue66';
+import { Issue163 } from './Issue163';
 
 export const App = () => (
   <div className="app">
-
     <h1>react-collapse</h1>
 
     <section className="section">
@@ -73,25 +71,42 @@ export const App = () => (
 
     <section className="section">
       <h2>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/nkbt/react-collapse/issues/40">40</a>.
-        Re-render nested components
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/nkbt/react-collapse/issues/40"
+        >
+          40
+        </a>
+        . Re-render nested components
       </h2>
       <Issue40 />
     </section>
 
-
     <section className="section">
       <h2>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/nkbt/react-collapse/issues/59">59</a>.
-        Instantly collapses if re-rendered during collapse
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/nkbt/react-collapse/issues/59"
+        >
+          59
+        </a>
+        . Instantly collapses if re-rendered during collapse
       </h2>
       <Issue59 />
     </section>
 
     <section className="section">
       <h2>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/nkbt/react-collapse/issues/66">66</a>.
-        Unnecessary unmount with keepCollapsedContent
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/nkbt/react-collapse/issues/66"
+        >
+          66
+        </a>
+        . Unnecessary unmount with keepCollapsedContent
       </h2>
       <p>Opened by default</p>
       <Issue66 isOpened />
@@ -101,11 +116,16 @@ export const App = () => (
 
     <section className="section">
       <h2>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/nkbt/react-collapse/issues/163">163</a>.
-        Overflow in collapse
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/nkbt/react-collapse/issues/163"
+        >
+          163
+        </a>
+        . Overflow in collapse
       </h2>
       <Issue163 />
     </section>
-
   </div>
 );

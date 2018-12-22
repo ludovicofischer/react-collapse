@@ -1,10 +1,8 @@
 import React from 'react';
-import {Collapse} from '../../src';
+import { Collapse } from '../../src';
 import text from './text.json';
 
-
 const getText = num => text.slice(0, num).map((p, i) => <p key={i}>{p}</p>);
-
 
 export class Hooks extends React.PureComponent {
   constructor(props) {
@@ -18,11 +16,7 @@ export class Hooks extends React.PureComponent {
   }
 
   render() {
-    const {
-      isOpened,
-      height,
-      paragraphs
-    } = this.state;
+    const { isOpened, height, paragraphs } = this.state;
 
     return (
       <div>
@@ -33,10 +27,13 @@ export class Hooks extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({
-                isOpened: checked,
-                isResting: false
-              })} />
+              onChange={({ target: { checked } }) =>
+                this.setState({
+                  isOpened: checked,
+                  isResting: false
+                })
+              }
+            />
           </label>
 
           <label className="label">
@@ -48,34 +45,41 @@ export class Hooks extends React.PureComponent {
               step={1}
               min={0}
               max={4}
-              onChange={({target: {value}}) => this.setState({
-                paragraphs: parseInt(value, 10),
-                isResting: false
-              })} />
+              onChange={({ target: { value } }) =>
+                this.setState({
+                  paragraphs: parseInt(value, 10),
+                  isResting: false
+                })
+              }
+            />
             {paragraphs}
           </label>
         </div>
         <div className="config">
-          <label className="label">
-            height: {height}px
-          </label>
+          <label className="label">height: {height}px</label>
           <label className="label">
             resting: {this.state.isResting ? 'true' : 'false'}
           </label>
-          <label className="label" ref={ref => {
-            this.ref = ref;
-          }} />
+          <label
+            className="label"
+            ref={ref => {
+              this.ref = ref;
+            }}
+          />
         </div>
         <Collapse
           isOpened={isOpened}
-          onFrame={({height}) => {
-            this.setState({height});
+          onFrame={({ height }) => {
+            this.setState({ height });
           }}
           onRest={() => {
-            this.setState({isResting: true});
+            this.setState({ isResting: true });
           }}
-          className="ReactCollapse--collapse">
-          <div className="text">{paragraphs ? getText(paragraphs) : <p>No text</p>}</div>
+          className="ReactCollapse--collapse"
+        >
+          <div className="text">
+            {paragraphs ? getText(paragraphs) : <p>No text</p>}
+          </div>
         </Collapse>
       </div>
     );

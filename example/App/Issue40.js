@@ -1,17 +1,15 @@
 import React from 'react';
-import {Collapse} from '../../src';
-import {VariableHeight} from './VariableHeight';
-
+import { Collapse } from '../../src';
+import { VariableHeight } from './VariableHeight';
 
 export class Issue40 extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {isOpened: false};
+    this.state = { isOpened: false };
   }
 
-
   render() {
-    const {isOpened} = this.state;
+    const { isOpened } = this.state;
 
     return (
       <div>
@@ -22,7 +20,10 @@ export class Issue40 extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
         </div>
 

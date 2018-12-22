@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Collapse} from '../../src';
+import { Collapse } from '../../src';
 import text from './text.json';
 
-
-const getText = num => text.slice(0, num)
-  .map((p, i) => <p key={i}>{p}</p>);
-
+const getText = num => text.slice(0, num).map((p, i) => <p key={i}>{p}</p>);
 
 export class VariableText extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isOpened: this.props.isOpened, paragraphs: 0};
+    this.state = { isOpened: this.props.isOpened, paragraphs: 0 };
   }
 
-
   render() {
-    const {isOpened, paragraphs} = this.state;
+    const { isOpened, paragraphs } = this.state;
 
     return (
       <div>
@@ -27,7 +23,10 @@ export class VariableText extends React.Component {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
 
           <label className="label">
@@ -39,7 +38,10 @@ export class VariableText extends React.Component {
               step={1}
               min={0}
               max={4}
-              onChange={({target: {value}}) => this.setState({paragraphs: parseInt(value, 10)})} />
+              onChange={({ target: { value } }) =>
+                this.setState({ paragraphs: parseInt(value, 10) })
+              }
+            />
             {paragraphs}
           </label>
         </div>

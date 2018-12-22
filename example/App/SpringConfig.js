@@ -1,7 +1,6 @@
 import React from 'react';
 import { config } from 'react-spring';
-import {Collapse} from '../../src';
-
+import { Collapse } from '../../src';
 
 export class SpringConfig extends React.PureComponent {
   constructor() {
@@ -16,20 +15,13 @@ export class SpringConfig extends React.PureComponent {
     this.onChangePreset = this.onChangePreset.bind(this);
   }
 
-  onChangePreset({target: {value: preset}}) {
-    const {tension, friction} = config[preset];
-    this.setState({tension, friction});
-  };
-
+  onChangePreset({ target: { value: preset } }) {
+    const { tension, friction } = config[preset];
+    this.setState({ tension, friction });
+  }
 
   render() {
-    const {
-      isOpened,
-      height,
-      preset,
-      tension,
-      friction
-    } = this.state;
+    const { isOpened, height, preset, tension, friction } = this.state;
 
     return (
       <div>
@@ -40,7 +32,10 @@ export class SpringConfig extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
 
           <label className="label">
@@ -52,7 +47,10 @@ export class SpringConfig extends React.PureComponent {
               step={50}
               min={0}
               max={500}
-              onChange={({target: {value}}) => this.setState({height: parseInt(value, 10)})} />
+              onChange={({ target: { value } }) =>
+                this.setState({ height: parseInt(value, 10) })
+              }
+            />
             {height}
           </label>
 
@@ -61,8 +59,13 @@ export class SpringConfig extends React.PureComponent {
             <select
               className="input"
               value={preset}
-              onChange={this.onChangePreset}>
-              {Object.keys(config).map(p => <option key={p} value={p}>{p}</option>)}
+              onChange={this.onChangePreset}
+            >
+              {Object.keys(config).map(p => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
             </select>
           </label>
 
@@ -75,7 +78,10 @@ export class SpringConfig extends React.PureComponent {
               step={10}
               min={0}
               max={300}
-              onChange={({target: {value}}) => this.setState({tension: parseInt(value, 10)})} />
+              onChange={({ target: { value } }) =>
+                this.setState({ tension: parseInt(value, 10) })
+              }
+            />
             {tension}
           </label>
 
@@ -88,17 +94,20 @@ export class SpringConfig extends React.PureComponent {
               step={5}
               min={0}
               max={40}
-              onChange={({target: {value}}) => this.setState({friction: parseInt(value, 10)})} />
+              onChange={({ target: { value } }) =>
+                this.setState({ friction: parseInt(value, 10) })
+              }
+            />
             {friction}
           </label>
         </div>
         <Collapse
           className="ReactCollapse--collapse"
           isOpened={isOpened}
-          springConfig={{tension, friction}}>
-          <div style={{height}} className="blob" />
+          springConfig={{ tension, friction }}
+        >
+          <div style={{ height }} className="blob" />
         </Collapse>
-
       </div>
     );
   }

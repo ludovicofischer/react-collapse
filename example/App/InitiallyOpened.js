@@ -1,15 +1,14 @@
 import React from 'react';
-import {Collapse} from '../../src';
-
+import { Collapse } from '../../src';
 
 export class InitiallyOpened extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {isOpened: true};
+    this.state = { isOpened: true };
   }
 
   render() {
-    const {isOpened} = this.state;
+    const { isOpened } = this.state;
     const height = 100;
 
     return (
@@ -21,11 +20,14 @@ export class InitiallyOpened extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
         </div>
         <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
-          <div style={{height}} className="blob" />
+          <div style={{ height }} className="blob" />
         </Collapse>
       </div>
     );

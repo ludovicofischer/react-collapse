@@ -1,16 +1,14 @@
 import React from 'react';
-import {Collapse} from '../../src';
-
+import { Collapse } from '../../src';
 
 export class VariableHeight extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {isOpened: false, height: 100};
+    this.state = { isOpened: false, height: 100 };
   }
 
-
   render() {
-    const {isOpened, height} = this.state;
+    const { isOpened, height } = this.state;
 
     return (
       <div {...this.props}>
@@ -21,7 +19,10 @@ export class VariableHeight extends React.PureComponent {
               className="input"
               type="checkbox"
               checked={isOpened}
-              onChange={({target: {checked}}) => this.setState({isOpened: checked})} />
+              onChange={({ target: { checked } }) =>
+                this.setState({ isOpened: checked })
+              }
+            />
           </label>
 
           <label className="label">
@@ -33,15 +34,17 @@ export class VariableHeight extends React.PureComponent {
               step={50}
               min={0}
               max={500}
-              onChange={({target: {value}}) => this.setState({height: parseInt(value, 10)})} />
+              onChange={({ target: { value } }) =>
+                this.setState({ height: parseInt(value, 10) })
+              }
+            />
             {height}
           </label>
         </div>
 
         <Collapse isOpened={isOpened} className="ReactCollapse--collapse">
-          <div style={{height}} className="blob" />
+          <div style={{ height }} className="blob" />
         </Collapse>
-
       </div>
     );
   }
