@@ -4,7 +4,6 @@ import { Spring, animated } from 'react-spring';
 const IDLING = 'IDLING';
 
 export class Collapse extends React.PureComponent {
-
   /**
    * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
    * fixedHeight: number, children: React.ReactChildren, onFrame: function }} props
@@ -22,16 +21,20 @@ export class Collapse extends React.PureComponent {
    * @param {{ height: string | number  }} springStyles
    */
   getStyle(springStyles) {
-    if (springStyles.height === 'auto'|| springStyles.height === this.props.fixedHeight) {
-      return {...springStyles};
+    if (
+      springStyles.height === 'auto' ||
+      springStyles.height === this.props.fixedHeight
+    ) {
+      return { ...springStyles };
     } else {
-      return {...springStyles, overflow: 'hidden'};
+      return { ...springStyles, overflow: 'hidden' };
     }
   }
   /**
 @param {{ height: string | number  }} springStyles
    */
-  renderContent = (springStyles) => { // eslint-disable-line
+  renderContent = springStyles => {
+    // eslint-disable-line
     const {
       isOpened,
       springConfig,
@@ -46,25 +49,29 @@ export class Collapse extends React.PureComponent {
     const dynamicStyles = this.getStyle(springStyles);
     return (
       <animated.div
-        style={{...dynamicStyles, ...style}}
+        style={{ ...dynamicStyles, ...style }}
         className={this.props.className}
-        {...props}>
+        {...props}
+      >
         {children}
       </animated.div>
     );
   };
 
-
   render() {
-    const targetHeight = this.props.fixedHeight !== -1 ? this.props.fixedHeight : 'auto';
-    const target = this.props.isOpened ? {height: targetHeight} : {height: 0};
+    const targetHeight =
+      this.props.fixedHeight !== -1 ? this.props.fixedHeight : 'auto';
+    const target = this.props.isOpened
+      ? { height: targetHeight }
+      : { height: 0 };
     return (
       <Spring
         native
         onRest={this.props.onRest}
         to={target}
         onFrame={this.props.onFrame}
-        config={this.props.springConfig}>
+        config={this.props.springConfig}
+      >
         {this.renderContent}
       </Spring>
     );
@@ -75,5 +82,5 @@ Collapse.defaultProps = {
   springConfig: {},
   style: {},
   fixedHeight: -1,
-  className: ""
+  className: ''
 };

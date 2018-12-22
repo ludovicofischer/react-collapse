@@ -1,7 +1,4 @@
-import { Collapse } from "./Collapse";
-import { UnmountClosed} from "./UnmountClosed";
+import { Collapse } from './Collapse';
+import { UnmountClosed } from './UnmountClosed';
 
-export {
-  Collapse,
-  UnmountClosed
-}
+export { Collapse, UnmountClosed };
