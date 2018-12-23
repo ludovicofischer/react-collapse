@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spring, animated } from 'react-spring';
+import {animated, Spring} from 'react-spring';
 
 /**
  * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
@@ -8,63 +8,42 @@ import { Spring, animated } from 'react-spring';
  */
 function Collapser(props) {
 
-  /**
-   * @param {{ height: string | number  }} springStyles
-   */
-  function getStyle(springStyles, props) {
-    if (
-      springStyles.height === 'auto' ||
-      springStyles.height === props.fixedHeight
-    ) {
-      return { ...springStyles };
-    } else {
-      return { ...springStyles, overflow: 'hidden' };
-    }
-  }
-  /**
-@param {{ height: string | number  }} springStyles
-   */
-  function renderContent(springStyles, props) {
-    // eslint-disable-line
-    const {
-      isOpened,
-      springConfig,
-      style,
-      onRest: _onRest,
-      onFrame,
-      children,
-      fixedHeight,
-      ...other
-    } = props;
+  const {
+    isOpened,
+    springConfig,
+    style,
+    onRest,
+    onFrame,
+    className,
+    children,
+    fixedHeight,
+    ...other
+  } = props;
 
-    const dynamicStyles = getStyle(springStyles, props);
-    return (
-      <animated.div
-        style={{ ...dynamicStyles, ...style }}
-        className={props.className}
-        {...other}
-      >
-        {children}
-      </animated.div>
-    );
-  }
-
-    const targetHeight =
-      props.fixedHeight !== -1 ? props.fixedHeight : 'auto';
-    const target = props.isOpened
-      ? { height: targetHeight }
-      : { height: 0 };
-    return (
-      <Spring
-        native
-        onRest={props.onRest}
-        to={target}
-        onFrame={props.onFrame}
-        config={props.springConfig}
-      >
-        {springStyles => renderContent(springStyles, props)}
-      </Spring>
-    );
+  const openHeight = fixedHeight !== -1 ? fixedHeight : 'auto';
+  const originalOverflow = style.overflow || 'visible';
+  return (
+    <Spring
+      native
+      onRest={onRest}
+      to={isOpened ? {height: openHeight} : {height: 0}}
+      onFrame={onFrame}
+      config={springConfig}
+    >
+      {({ height }) => (
+        <animated.div
+          style={{
+            height: height,
+            overflow: height.interpolate(height => height === openHeight ? originalOverflow : 'hidden'),
+            ...style }}
+          className={className}
+          {...other}
+        >
+          {children}
+        </animated.div>
+      )}
+    </Spring>
+  );
 }
 
 Collapser.defaultProps = {

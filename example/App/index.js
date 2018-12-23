@@ -14,6 +14,7 @@ import { Issue66 } from './Issue66';
 import { Issue163 } from './Issue163';
 
 export const App = () => (
+  <React.StrictMode>
   <div className="app">
     <h1>react-collapse</h1>
 
@@ -128,4 +129,5 @@ export const App = () => (
       <Issue163 />
     </section>
   </div>
+  </React.StrictMode>
 );

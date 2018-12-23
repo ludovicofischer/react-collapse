@@ -68,7 +68,7 @@ export class Issue66 extends React.Component {
         <div className="log" ref={ref => (this.ref = ref)} />
 
         {this.state.shouldRender ? (
-          <Collapse isOpened={this.props.isOpened}>
+          <Collapse isOpened={this.props.isOpened} className="ReactCollapse--collapse">
             <Test onMount={this.onMount} onUnmount={this.onUnmount} />
           </Collapse>
         ) : null}
