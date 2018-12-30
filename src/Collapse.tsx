@@ -1,13 +1,20 @@
 import React from 'react';
-import {animated, Spring} from 'react-spring';
+import { animated, Spring, SpringConfig } from 'react-spring';
 
-/**
- * @param {{isOpened: boolean, style: object, className: string, onRender: function, onMeasure: function,
- * onRest: (string|number) => void,
- * fixedHeight: number, children: React.ReactChildren, onFrame: function, springConfig: any }} props
- */
-function Collapser(props) {
+type MovementCallback = (arg: object) => void;
 
+interface CollapseProps {
+  isOpened: boolean;
+  style: { overflow?: string };
+  className: string;
+  fixedHeight?: number;
+  children: React.ReactChildren;
+  onRest?: MovementCallback;
+  onFrame?: MovementCallback;
+  springConfig?: SpringConfig;
+}
+
+function Collapser(props: CollapseProps) {
   const {
     isOpened,
     springConfig,
@@ -26,7 +33,7 @@ function Collapser(props) {
     <Spring
       native
       onRest={onRest}
-      to={isOpened ? {height: openHeight} : {height: 0}}
+      to={isOpened ? { height: openHeight } : { height: 0 }}
       onFrame={onFrame}
       config={springConfig}
     >
@@ -34,8 +41,11 @@ function Collapser(props) {
         <animated.div
           style={{
             height: height,
-            overflow: height.interpolate(height => height === openHeight ? originalOverflow : 'hidden'),
-            ...style }}
+            overflow: height.interpolate(height =>
+              height === openHeight ? originalOverflow : 'hidden'
+            ),
+            ...style
+          }}
           className={className}
           {...other}
         >

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Transition, animated } from 'react-spring';
 
-/**
- * @param {{ isOpened: boolean, onRest: () => void, children: React.ReactChildren }} props
- */
-const UnmountClosed = React.memo(function Unmounter(props) {
+function Unmounter(props: {
+  children: React.ReactChildren;
+  isOpened: boolean;
+  onRest: () => void;
+}) {
   return (
     <Transition
       native
@@ -24,6 +25,6 @@ const UnmountClosed = React.memo(function Unmounter(props) {
       }
     </Transition>
   );
-});
+}
 
-export { UnmountClosed };
+export const UnmountClosed = React.memo(Unmounter);

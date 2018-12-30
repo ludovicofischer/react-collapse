@@ -9,10 +9,11 @@ module.exports = {
     format: 'esm'
   },
  plugins: [
-  resolve({browser: true, jsnext: true}),
+  resolve({browser: true, jsnext: true, extensions: ['.mjs', '.js', '.json', '.node', '.ts', '.tsx']}),
   commonjs({include: 'node_modules/**'}),
   babel({
-    exclude: 'node_modules/**'
+    exclude: 'node_modules/**',
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   })
  ],
  external: ['react', 'react-dom', 'react-spring']
