@@ -14,14 +14,18 @@ exports.loaders = {
     include: [pathTo(`src`), pathTo(`example`)]
   },
   babel: {
-    test: /\.js$/,
+    test: [/\.js$/, /\.tsx?/],
     loader: `babel-loader`,
     include: [pathTo(`src`), pathTo(`example`)],
     options: {
       babelrc: false,
       presets: [
         `@babel/preset-react`,
-        [`@babel/preset-env`, {modules: false}]
+        [`@babel/preset-env`, {modules: false}],
+        ["@babel/preset-typescript", {
+          "isTSX": true,
+          "allExtensions": true
+        }]
       ],
       plugins: [
         `@babel/plugin-proposal-object-rest-spread`,

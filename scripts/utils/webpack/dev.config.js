@@ -9,6 +9,9 @@ const {
 
 
 module.exports = {
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+  },
   devtool: `cheap-eval-source-map`,
   mode: 'development',
   entry: [

@@ -17,7 +17,7 @@ export class SpringConfig extends React.PureComponent {
 
   onChangePreset({ target: { value: preset } }) {
     const { tension, friction } = config[preset];
-    this.setState({ tension, friction });
+    this.setState({ tension, friction, preset });
   }
 
   render() {
