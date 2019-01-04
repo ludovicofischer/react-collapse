@@ -1,5 +1,5 @@
 {
-  "name": "react-collapse",
+  "name": "@ludovicofischer/react-springy-collapse",
   "version": "1.0.0",
   "description": "Component-wrapper for collapse animation with react-spring for elements with variable (and dynamic) height",
   "module": "dist/index.js",

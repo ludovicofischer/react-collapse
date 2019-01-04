@@ -1,40 +1,21 @@
-![React Collapse](example/react-collapse.gif)
-
 
 ## Installation
 
 ### NPM
 
 ```sh
-npm install --save react react-spring react-collapse
+npm install --save react react-spring @ludovicofischer/react-springy-collapse
 ```
 
 Don't forget to manually install peer dependencies (`react`, `react-spring`) if you use npm@3.
 
-
-### 1998 Script Tag:
-```html
-<script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-spring/build/react-spring.js"></script>
-<script src="https://unpkg.com/react-collapse/build/react-collapse.js"></script>
-(Module exposed as `ReactCollapse`)
-```
-
-
-## Demo
-
-[http://nkbt.github.io/react-collapse](http://nkbt.github.io/react-collapse)
-
-## Codepen demo
-
-[http://codepen.io/nkbt/pen/MarzEg](http://codepen.io/nkbt/pen/MarzEg?editors=101)
 
 ## Usage
 
 Default behaviour, never unmounts content
 
 ```js
-import {Collapse} from 'react-collapse';
+import {Collapse} from '@ludovicofischer/react-springy-collapse';
 
 // ...
 <Collapse isOpened={true || false}>
@@ -45,7 +26,7 @@ import {Collapse} from 'react-collapse';
 If you want to unmount collapsed content, use `Unmount` component provided as:
 
 ```js
-import {UnmountClosed} from 'react-collapse';
+import {UnmountClosed} from '@ludovicofischer/react-springy-collapse';
 
 // ...
 <UnmountClosed isOpened={true || false}>
@@ -56,12 +37,12 @@ import {UnmountClosed} from 'react-collapse';
 ## Options
 
 
-#### `isOpened`: PropTypes.boolean.isRequired
+#### `isOpened`: boolean
 
 Expands or collapses content.
 
 
-#### `children`: PropTypes.node.isRequired
+#### `children`: ReactChildren
 
 One or multiple children with static, variable or dynamic height.
 
@@ -93,37 +74,22 @@ import {config} from 'react-spring';
 </Collapse>
 ```
 
-#### `forceInitialAnimation`: PropTypes.boolean
+#### `className`: string
 
-When initially opened, by default collapse content will be opened without animation, instantly. With this option set to `true` you can enforce initial rendering to be smoothly expanded from 0.
-It is used internally in `Unmount` component implementation.
-
-
-#### `theme`: PropTypes.objectOf(PropTypes.string)
-
-It is possible to set `className` for extra `div` elements that ReactCollapse creates.
+It is possible to set `className` for the extra `div` element that ReactCollapse creates.
 
 Example:
 ```js
-<Collapse theme={{collapse: 'foo', content: 'bar'}}>
+<Collapse className="collapse">
   <div>Customly animated container</div>
 </Collapse>
 ```
 
-Default values:
-```js
-const theme = {
-  collapse: 'ReactCollapse--collapse',
-  content: 'ReactCollapse--content'
-}
-```
 
 Which ends up in the following markup:
 ```html
-<div class="ReactCollapse--collapse">
-  <div class="ReactCollapse--content">
-    {children}
-  </div>
+<div className="collapse">
+  {children}
 </div>
 ```
 
@@ -131,8 +97,8 @@ NOTE: these are not style objects, but class names!
 
 
 #### `onRest`: PropTypes.func
-
-Use spring props.
+Performs some action when the animation end. Same as in `react-spring`. 
+See http://react-spring.surge.sh/spring#props
 
 ```js
 <Collapse onRest={() => console.log(123)}>
@@ -140,20 +106,9 @@ Use spring props.
 </Collapse>
 ```
 
-#### `onMeasure`: PropTypes.func
+#### `onFrame`: PropTypes.func
 
-Callback function for changes in height.
-As an [example](https://github.com/nutgaard/react-collapse/blob/master/src/example/App/Hooks.js) it can be used to implement auto-scroll if content expand below the fold.
-
-```js
-<Collapse onMeasure={({height, width}) => this.setState({height, width})}>
-  <div>Container text</div>
-</Collapse>
-```
-
-#### `onRender`: PropTypes.func
-
-Use Spring `onFrame`
+Same as react-spring: http://react-spring.surge.sh/spring#props
 
 
 #### Pass-through props
@@ -175,72 +130,16 @@ All other props are applied to a container that is being resized. So it is possi
 
 ## Behaviour notes
 
-- initially opened Collapse elements will be statically rendered with no animation (see [#19](https://github.com/nkbt/react-collapse/pull/19))
-- it is possible to override `overflow` and `height` styles for Collapse (see [#16](https://github.com/nkbt/react-collapse/pull/16)), and ReactCollapse may behave unexpectedly. Do it only when you definitely know you need it, otherwise, never override `overflow` and `height` styles.
-- Due to the complexity of margins and their potentially collapsible nature, ReactCollapse does not support (vertical) margins on their children. It might lead to the animation "jumping" to its correct height at the end of expanding. To avoid this, use padding instead of margin. (see [#101](https://github.com/nkbt/react-collapse/issues/101))
-
-## Migrating from v2 to v3
-
-1. Use named exports, it is a preferred way
-
-  V2:
-  ```js
-  import Collapse from 'react-collapse';
-  ```
-  
-  V3
-  ```js
-  import {Collapse} from 'react-collapse';
-  ```
-  
-2. Default behavior changed to never unmount collapsed element. To actually unmount use extra provided component `UnmountCollapsed`
-
-  V2: 
-  ```js
-  import Collapse from 'react-collapse';
-  
-  <Collapse isOpened={true || false}>
-    <div>Random content</div>
-  </Collapse>
-  ```  
-
-  V3: 
-  ```js
-  import {UnmountClosed as Collapse} from 'react-collapse';
-  
-  <Collapse isOpened={true || false}>
-    <div>Random content</div>
-  </Collapse>
-  ```  
-
-3. `onHeightReady` renamed to `onMeasure` which now takes object of shape `{width, height}`
-
-  V2: 
-  ```js
-  <Collapse onHeightReady={height => console.log(height)}>
-    <div>Random content</div>
-  </Collapse>
-  ```  
-
-  V3: 
-  ```js
-  <Collapse onMeasure={({height, width}) => console.log(height, width)}>
-    <div>Random content</div>
-  </Collapse>
-  ```  
-
-4. Some new props/features: `hasNestedCollapse`, `forceInitialAnimation`, `onRender`, etc
-
+- initially opened Collapse elements will be statically rendered with no animation
+- Overriding `overflow` and `height` styles may behave unexpectedly. Do it only when you definitely know you need it, otherwise, never override `overflow` and `height` styles.
 
 ## Development and testing
 
-Currently is being developed and tested with the latest stable `Node 8` on `OSX`.
+Currently is being developed and tested with `Node 10` on `OSX`.
 
-To run example covering all `ReactCollapse` features, use `yarn start`, which will compile `example/Example.js`
+To run example covering all features, use `npm start`, which will compile `example/Example.js`
 
 ```bash
-git clone git@github.com:ludovicofischer/react-collapse.git
-cd react-collapse
 npm install
 npm start
 
@@ -248,15 +147,13 @@ npm start
 open http://localhost:8080
 ```
 
-## Tests
+## to run ESLint check
 
-```bash
-# to run ESLint check
-npm lint
-
-# to run tests
-npm test
+npm run lint
 
 ## License
 
 MIT
+
+# Thanks
+[react-collapse](https://github.com/nkbt/react-collapse) for tests and the original implementation.
