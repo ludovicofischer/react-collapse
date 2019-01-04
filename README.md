@@ -7,7 +7,7 @@
 npm install --save react react-spring @ludovicofischer/react-springy-collapse
 ```
 
-Don't forget to manually install peer dependencies (`react`, `react-spring`) if you use npm@3.
+Don't forget to manually install peer dependencies (`react`, `react-spring`).
 
 
 ## Usage
