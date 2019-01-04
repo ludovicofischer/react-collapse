@@ -4,7 +4,7 @@
 ### NPM
 
 ```sh
-npm install --save react react-spring @ludovicofischer/react-springy-collapse
+npm install --save react react-spring @ludofischer/react-springy-collapse
 ```
 
 Don't forget to manually install peer dependencies (`react`, `react-spring`).
@@ -15,7 +15,7 @@ Don't forget to manually install peer dependencies (`react`, `react-spring`).
 Default behaviour, never unmounts content
 
 ```js
-import {Collapse} from '@ludovicofischer/react-springy-collapse';
+import {Collapse} from '@ludofischer/react-springy-collapse';
 
 // ...
 <Collapse isOpened={true || false}>
@@ -26,7 +26,7 @@ import {Collapse} from '@ludovicofischer/react-springy-collapse';
 If you want to unmount collapsed content, use `Unmount` component provided as:
 
 ```js
-import {UnmountClosed} from '@ludovicofischer/react-springy-collapse';
+import {UnmountClosed} from '@ludofischer/react-springy-collapse';
 
 // ...
 <UnmountClosed isOpened={true || false}>
