@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.0",
   "description": "Component-wrapper for collapse animation with react-spring for elements with variable (and dynamic) height",
   "module": "dist/index.js",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
   "scripts": {
     "start": "webpack-dev-server --config scripts/utils/webpack/dev.config.js",
     "dist": "rollup -c",
