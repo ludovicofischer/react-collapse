@@ -27,4 +27,4 @@ function Unmounter(props: {
   );
 }
 
-export const UnmountClosed = React.memo(Unmounter);
+export const UnmountClosed = Unmounter;

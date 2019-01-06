@@ -63,4 +63,4 @@ Collapser.defaultProps = {
   className: ''
 };
 
-export const Collapse = React.memo(Collapser);
+export const Collapse = Collapser;
